@@ -3,7 +3,7 @@
 #include <string.h>
 using namespace std;
 
-void Login();
+void adminLogIn();
 void signUp();
 
 int main()
@@ -18,30 +18,46 @@ int main()
 
     if (choice == 'L'){ 
         cout<<"wellcome to the login page "<<endl;  
-
-      Login();
-        
-
+      adminLogIn();  
     }
     else if (choice == 'S'){
-        cout << "wellcome to the SignUp page";
+        cout << "wellcome to the SignUp page"<<endl<<endl;
+        signUp();
 
-  
      }else
         cout << "Please Enter a valid character  ";
     return 0;
-}
+    }
 
-void Login(){
+void adminLogIn(){
     string user_Name;
     string password;
     cout<<"Enter your user Name : ";
     cin>>user_Name;
     cout<<"Enter your password : ";
     cin>>password;
-
-    cout<<endl<<endl<<"Logged in successfully : "<<endl;
+    if(user_Name == "admin" && password == "12345")
+    cout<<endl<<"Admin Logged in successfully : "<<endl;
+    else
+    cout<<"sorry invalid person ";
 
 }
 
 
+void signUp(){
+string name;
+string user_Name;
+string password;
+int phoneNumber;
+
+cout<<"Enter your Name : ";
+cin>>name;
+cout<<"Enter a user name  : ";
+cin>>user_Name;
+cout<<"Enter a password : ";
+cin>>password;
+cout<<"Enter a phone Number : ";
+cin>>phoneNumber;
+cout<<endl<<endl<<"congratulations account created successfully "<<endl;
+
+}
