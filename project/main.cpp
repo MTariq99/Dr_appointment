@@ -1,5 +1,5 @@
 #include <iostream>
-#include <fstream>//for filing
+#include <fstream> //for filing
 #include "string"
 using namespace std;
 
@@ -67,7 +67,7 @@ int main()
         bookAnAppointment();
         break;
     case 4:
-         existingAppointment();
+        existingAppointment();
         break;
         cout << "wellcome to the SignUp page" << endl
              << endl;
@@ -101,33 +101,37 @@ void LogIn()
         viewPatients();
     }
     else if (user_type = 'p')
-    {      
-             cout << "what do you want " << endl<< endl;
-             
+    {
+        cout << "what do you want " << endl
+             << endl;
+
         cout << "appointment" << endl;
         cout << "want to see available slots" << endl
              << endl;
-        cout << "3. book an appointment"<<endl;
-        cout<<"4. free slots"<<endl;
-        cout<<"5. doctor's information"<<endl;
-        cout<<"enter a  number accordingly : ";
+        cout << "3. book an appointment" << endl;
+        cout << "4. free slots" << endl;
+        cout << "5. doctor's information" << endl;
+        cout << "enter a  number accordingly : ";
         cin >> userChoice;
         if (userChoice == 3)
         {
             bookAnAppointment();
-        }else if (userChoice == 4)
-       {
+        }
+        else if (userChoice == 4)
+        {
             existingAppointment();
-       }  else if (userChoice == 5)
-       {
-        cout << "doctors credentials are:" << endl;
-        cout << d.name << endl;
-        cout << d.speciality << endl;
-        cout << d.age<<" years old ";
+        }
+        else if (userChoice == 5)
+        {
+            cout << "doctors credentials are:" << endl;
+            cout << d.name << endl;
+            cout << d.speciality << endl;
+            cout << d.age << " years old ";
+        }
     }
-        }    
-    else if(login.user_Name!=un   && login.password!= pw ){
-    
+    else if (login.user_Name != un && login.password != pw)
+    {
+
         cout << "please create your account " << endl;
         signUp();
     }
@@ -178,7 +182,8 @@ void signUp()
         cin >> signup.user_Name;
         cout << "enter a password : ";
         cin >> signup.password;
-    } if (signup.user_type == 'd')
+    }
+    if (signup.user_type == 'd')
     {
         ofstream doctor;
         doctor.open("doctorData.txt", ios::app);
@@ -198,12 +203,14 @@ void signUp()
     {
         ofstream file;
         file.open("patientData.txt", ios::app);
-        file << signup.user_Name <<endl;
+        file << signup.user_Name << endl;
         file << signup.password << endl;
         file.close();
     }
 
-    cout << endl<< endl << "congratulations account created successfully " << endl;  
+    cout << endl
+         << endl
+         << "congratulations account created successfully " << endl;
     cout << "want to login" << endl;
     cout << "if you want then please Enter yes : ";
     cin >> userWant;
@@ -349,100 +356,100 @@ int bookAnAppointment()
     return 0;
 }
 
-    int existingAppointment()
+int existingAppointment()
+{
+    system("cls");
+
+    cout << "\n ----- List of Available Appointments ---- \n";
+    ifstream read;
+    read.open("appointment.dat");
+
+    int hoursbook = 10;
+
+    int arr[10] = {0, 0, 0, 0, 0, 0, 0, 0, 0, 0};
+    int recordFound = 0;
+
+    if (read)
     {
-        system("cls");
+        string line;
+        char key = 'A';
+        int i = 9;
 
-        cout << "\n ----- List of Available Appointments ---- \n";
-        ifstream read;
-        read.open("appointment.dat");
-
-        int hoursbook = 10;
-
-        int arr[10] = {0, 0, 0, 0, 0, 0, 0, 0, 0, 0};
-        int recordFound = 0;
-
-        if (read)
+        while (getline(read, line))
         {
-            string line;
+            char temp = line[0];
+            int index = (temp - 65);
+            arr[index] = 1;
+            recordFound = 1;
+        }
+        if (recordFound == 1)
+        {
+            cout << "\n Appointment List by hours:";
             char key = 'A';
-            int i = 9;
-
-            while (getline(read, line))
+            int hours = 9;
+            for (int i = 0; i <= 9; i++)
             {
-                char temp = line[0];
-                int index = (temp - 65);
-                arr[index] = 1;
-                recordFound = 1;
-            }
-            if (recordFound == 1)
-            {
-                cout << "\n Appointment List by hours:";
-                char key = 'A';
-                int hours = 9;
-                for (int i = 0; i <= 9; i++)
+                if (i == 0)
                 {
-                    if (i == 0)
-                    {
-                        if (arr[i] == 0)
-                            cout << "\n " << key << "-> 0" << hours << " - Available";
-                        else
-                            cout << "\n " << key << "-> 0" << hours << " - Booked";
-                    }
-
+                    if (arr[i] == 0)
+                        cout << "\n " << key << "-> 0" << hours << " - Available";
                     else
-                    {
-                        if (arr[i] == 0)
-                            cout << "\n " << key << "->" << hours << " - Available";
-                        else
-                            cout << "\n " << key << "->" << hours << " - Booked";
-                    }
-                    hours++;
-                    key++;
+                        cout << "\n " << key << "-> 0" << hours << " - Booked";
                 }
-            }
 
-            read.close();
-
-            if (recordFound == 0)
-            {
-                cout << "\n Appointment Available for following hours :";
-                char key = 'A';
-                for (int i = 9; i <= 18; i++)
+                else
                 {
-                    if (i == 9)
-                        cout << "\n " << key << " -> 0" << i << " - Available";
+                    if (arr[i] == 0)
+                        cout << "\n " << key << "->" << hours << " - Available";
                     else
-                        cout << "\n " << key << " -> " << i << " - booked";
-                    key++;
+                        cout << "\n " << key << "->" << hours << " - Booked";
                 }
+                hours++;
+                key++;
             }
         }
-        ofstream out;
-        out.open("appointment.dat", ios::app);
 
-        cout << "\n Please any key to continue..";
-        getchar();
-        getchar();
-        return 0;
-    }
+        read.close();
 
-    void viewPatients()
-    {
-        string drChoice, viewPatient;
-        cout << "do you want to see patients appointments please enter viewpatient : ";
-        cin >> drChoice;
-        ifstream openfile("appointment.dat");
-        if (openfile.is_open())
+        if (recordFound == 0)
         {
-            while (!openfile.eof())
+            cout << "\n Appointment Available for following hours :";
+            char key = 'A';
+            for (int i = 9; i <= 18; i++)
             {
-                getline(openfile, viewPatient);
-                cout << viewPatient << endl;
+                if (i == 9)
+                    cout << "\n " << key << " -> 0" << i << " - Available";
+                else
+                    cout << "\n " << key << " -> " << i << " - booked";
+                key++;
             }
         }
     }
-    bool payFee()
+    ofstream out;
+    out.open("appointment.dat", ios::app);
+
+    cout << "\n Please any key to continue..";
+    getchar();
+    getchar();
+    return 0;
+}
+
+void viewPatients()
+{
+    string drChoice, viewPatient;
+    cout << "do you want to see patients appointments please enter viewpatient : ";
+    cin >> drChoice;
+    ifstream openfile("appointment.dat");
+    if (openfile.is_open())
+    {
+        while (!openfile.eof())
+        {
+            getline(openfile, viewPatient);
+            cout << viewPatient << endl;
+        }
+    }
+}
+bool payFee()
 {
     int fee;
     cout << "please Enter 1000RS doctor fee: ";
