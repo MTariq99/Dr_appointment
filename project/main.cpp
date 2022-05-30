@@ -62,21 +62,6 @@ int main()
     case 2:
 
         LogIn();
-        //         cout << "what do you want " << endl<<endl;
-        //     cout << "appointment" << endl<<endl;
-        //     cout << "want to see available slots" << endl<<endl;
-        //     cout << " '3' for booking an appointment and '4' for existingslots:  ";
-        //     cin >> userchoice;
-        //      if (userchoice == 3)
-        //         bookAnAppointment();
-        //     else if (userchoice == 4)
-        //         existingAppointment();
-        //          else
-        // {
-        //     cout << "please create your account " << endl;
-        //     signUp();
-        // }
-
         break;
     case 3:
         bookAnAppointment();
@@ -116,8 +101,8 @@ void LogIn()
         viewPatients();
     }
     else if (user_type = 'p')
-    {
-        cout << "what do you want " << endl<< endl;
+    {      
+             cout << "what do you want " << endl<< endl;
              
         cout << "appointment" << endl;
         cout << "want to see available slots" << endl
@@ -134,16 +119,15 @@ void LogIn()
        {
             existingAppointment();
        }  else if (userChoice == 5)
-    {
+       {
         cout << "doctors credentials are:" << endl;
         cout << d.name << endl;
         cout << d.speciality << endl;
         cout << d.age<<" years old ";
     }
-    }
-  
-    else
-    {
+        }    
+    else if(login.user_Name!=un   && login.password!= pw ){
+    
         cout << "please create your account " << endl;
         signUp();
     }
@@ -270,7 +254,7 @@ int bookAnAppointment()
                     if (arr[i] == 0)
                         cout << "\n " << key << "-> 0" << hours << " - Available";
                     else
-                        cout << "\n " << key << "-> 0" << hours << " - Booked";
+                        cout << "\n " << key << "-> 0" << hours << " - available`";
                 }
 
                 else
@@ -278,7 +262,7 @@ int bookAnAppointment()
                     if (arr[i] == 0)
                         cout << "\n " << key << "->" << hours << " - Available";
                     else
-                        cout << "\n " << key << "->" << hours << " - Booked";
+                        cout << "\n " << key << "->" << hours << " - available";
                 }
                 hours++;
                 key++;
@@ -296,7 +280,7 @@ int bookAnAppointment()
             if (i == 9)
                 cout << "\n " << key << " -> 0" << i << " - Available";
             else
-                cout << "\n " << key << " -> " << i << " - Booked";
+                cout << "\n " << key << " -> " << i << " - available";
             key++;
         }
     }
